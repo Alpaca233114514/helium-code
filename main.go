@@ -58,5 +58,12 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("BaseURL: %s\nmodel: %s\nAPIKey length: %d\n", cfg.BaseURL, cfg.Model, len(cfg.APIKey))
+	fmt.Printf(
+		"BaseURL: %s\n"+
+			"model: %s\n"+
+			"APIKey length: %d\n",
+		cfg.BaseURL,
+		cfg.Model,
+		len(cfg.APIKey),
+	)
 }
