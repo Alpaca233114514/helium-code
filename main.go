@@ -1,10 +1,15 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
+	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 // 1：定义配置
@@ -12,6 +17,16 @@ type Config struct {
 	APIKey  string
 	BaseURL string
 	Model   string
+}
+
+type Message struct{
+	Role string `json:"role"`
+	Content string `json:"content"`
+}
+
+type ChatRequest struct{
+	Model string `json:"model"`
+	Messages []Message `json:"messages"`
 }
 
 func reqiureEnv(key string) (string, error) {
@@ -67,3 +82,23 @@ func main() {
 		len(cfg.APIKey),
 	)
 }
+
+// 开始写模型接口
+func sendChat(cfg Config, prompt string)(string,error){
+reqbody := []ChatRequest{
+		Model: cfg.Model,
+		Messages: (
+			Role:"user",
+			Content: prompt
+		)
+	}
+reqBytes,err := json.Marshal(reqBody)
+return "", err
+if err != nil {
+	
+
+// 写chat/completions URL
+endpoint := strings.TrimRight(cfg.BaseURL,"/") + "/chat/completions"
+}
+
+
